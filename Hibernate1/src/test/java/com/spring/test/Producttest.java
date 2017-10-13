@@ -1,6 +1,7 @@
 package com.spring.test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -13,6 +14,7 @@ import com.backend.model.Product;
 
 @SuppressWarnings("unused")
 @ComponentScan("com.spring")
+@Ignore
 public class Producttest 
 {	
 	/*@Autowired
@@ -20,8 +22,7 @@ public class Producttest
 	*/
 	@Autowired
 	private static ProductDAO productDAO;
-	
-	
+		
 	@SuppressWarnings("resource")
 	@BeforeClass
 	public static void initialize()
@@ -36,8 +37,9 @@ public class Producttest
 		
 		
 	}
+	@Ignore
 	@Test
-	public void createProduct()
+	public void addProduct()
 	{
 		Product product =new Product();
 		product.setName("iphone 7");
@@ -45,7 +47,20 @@ public class Producttest
 		product.setPrice(72000);
 		
 	
-		boolean flag=productDAO.saveProduct(product);
+		boolean flag=productDAO.addProduct(product);
+		assertEquals("createProductTestCase", true, flag);
+	}
+	//@Ignore
+	@Test
+	public void updateProduct()
+	{
+		Product product =new Product();
+		product.setName("iphone 7");
+		product.setQuantity(5);
+		product.setPrice(72000);
+		
+	
+		boolean flag=productDAO.updateProduct(product);
 		assertEquals("createProductTestCase", true, flag);
 	}
 }

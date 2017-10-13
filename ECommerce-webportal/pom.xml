@@ -4,6 +4,7 @@
   <artifactId>ECommerce-webportal</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
+  <name>SpringSecurity Custom Login Form XML</name>
   <properties>
 		<jdk.version>1.8</jdk.version>
 		<spring.security.version>4.0.1.RELEASE</spring.security.version>
@@ -14,7 +15,6 @@
   <dependency>
   <groupId>com.hibernate</groupId>
   <artifactId>Hibernate1</artifactId>
- 
   <version>0.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>

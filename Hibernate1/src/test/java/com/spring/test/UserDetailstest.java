@@ -1,6 +1,7 @@
 package com.spring.test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -14,6 +15,7 @@ import com.backend.DAO.UserDetailsDAO;
 
 @SuppressWarnings("unused")
 @ComponentScan("com.spring")
+@Ignore
 public class UserDetailstest
 {	
 	//@Autowired
@@ -21,7 +23,6 @@ public class UserDetailstest
 	
 	@Autowired
 	private static UserDetailsDAO userdetailsDAO;
-	
 	
 	@SuppressWarnings("resource")
 	@BeforeClass
@@ -33,7 +34,7 @@ public class UserDetailstest
 		context.refresh();
 		
 		//userdetails=(UserDetails) context.getBean("userdetails");
-		userdetailsDAO=(UserDetailsDAO) context.getBean("userdetailsDAO");
+		userdetailsDAO=(UserDetailsDAO) context.getBean("userDetailsDAO");
 		
 		
 	}

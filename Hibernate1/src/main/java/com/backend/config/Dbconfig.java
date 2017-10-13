@@ -38,6 +38,7 @@ import com.backend.model.UserDetails;
 
 public class Dbconfig  
 {     
+	@Autowired
 	 @Bean(name = "dataSource")
 		public DataSource getDataSource() {
 			DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -50,6 +51,7 @@ public class Dbconfig
 
 		}
 
+	 
 	 private Properties getHibernateProperties() 
 		{
 			Properties properties = new Properties();
@@ -100,7 +102,7 @@ public class Dbconfig
 		return new CategoryDAOImpl(sessionFactory);
 	}
 	@Autowired
-	@Bean(name = "userdetailsDAO")
+	@Bean(name = "userDetailsDAO")
 	public UserDetailsDAO getUserDetailsDAO(SessionFactory sessionFactory)
 	{
 		return new UserDetailsDAOImpl(sessionFactory);

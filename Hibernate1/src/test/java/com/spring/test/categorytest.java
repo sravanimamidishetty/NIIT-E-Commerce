@@ -1,6 +1,7 @@
 package com.spring.test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -15,6 +16,7 @@ import com.backend.model.Category;
 
 @SuppressWarnings("unused")
 @ComponentScan("com.spring")
+@Ignore
 public class categorytest 
 {	
 	/*@Autowired
@@ -22,7 +24,6 @@ public class categorytest
 	*/
 	@Autowired
 	private static CategoryDAO categoryDAO;
-	
 	
 	@SuppressWarnings("resource")
 	@BeforeClass

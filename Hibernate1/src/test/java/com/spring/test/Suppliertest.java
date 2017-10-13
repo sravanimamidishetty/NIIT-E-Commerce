@@ -1,6 +1,7 @@
 package com.spring.test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -13,6 +14,7 @@ import com.backend.DAO.SupplierDAO;
 
 @SuppressWarnings("unused")
 @ComponentScan("com.spring")
+@Ignore
 public class Suppliertest 
 {	
 	@Autowired
@@ -21,8 +23,7 @@ public class Suppliertest
 	@Autowired
 	private static SupplierDAO supplierDAO;
 	
-	
-	@SuppressWarnings("resource")
+		@SuppressWarnings("resource")
 	@BeforeClass
 	public static void initialize()
 	{

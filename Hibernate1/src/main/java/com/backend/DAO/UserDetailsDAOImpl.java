@@ -6,8 +6,6 @@ import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.junit.Ignore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -21,22 +19,23 @@ public class UserDetailsDAOImpl implements UserDetailsDAO {
 		this.sessionFactory=sessionFactory;
 	}
 
-@Ignore
 @Transactional
 	public List getAllUserDetails() {
 		return sessionFactory.getCurrentSession().createQuery("from UserDetails").list();
 	}
+
 @Transactional
 public boolean saveUserDetails(UserDetails userdetails) {
 	// TODO Auto-generated method stub
-	Session s1=sessionFactory.openSession();
-	s1.saveOrUpdate(userdetails);
-	Transaction t=s1.beginTransaction();
-	s1.flush();
-	s1.close();
-	t.commit();
+	//Session s1=sessionFactory.openSession();
+	Session sf = sessionFactory.getCurrentSession();
+	//Transaction t=s1.beginTransaction();
+	sf.saveOrUpdate(userdetails);
+	
+	//s1.flush();
+	//s1.close();
+	//t.commit();
 	return true;
 }
-
 
 }

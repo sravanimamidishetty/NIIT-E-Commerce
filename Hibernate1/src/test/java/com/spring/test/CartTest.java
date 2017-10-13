@@ -1,5 +1,8 @@
 package com.spring.test;
 import static org.junit.Assert.*;
+
+import java.util.List;
+
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -16,6 +19,7 @@ import com.backend.model.Product;
 
 @SuppressWarnings("unused")
 @ComponentScan("com.spring")
+@Ignore
 public class CartTest 
 {	
 	/*@Autowired
@@ -23,6 +27,7 @@ public class CartTest
 	*/
 	@Autowired
 	private static CartDAO cartDAO;
+
 	
 	
 	@SuppressWarnings("resource")
@@ -44,12 +49,12 @@ public class CartTest
 	public void addCart()
 	{
 		Cart cart=new Cart();
-		cart.setCartItemId(1);
-		cart.setOrderId(124);
-		cart.setPrice(2500);
-		cart.setProductId(124);
-		cart.setQuantity(3);
-		cart.setUsername("NP");
+		cart.setCartItemId(2);
+		cart.setOrderId(134);
+		cart.setPrice(3500);
+		cart.setProductId(134);
+		cart.setQuantity(5);
+		cart.setStatus("NP");
 		cart.setUsername("sravani");
 	
 		boolean flag=cartDAO.addCart(cart);
@@ -71,7 +76,7 @@ public class CartTest
 		//boolean flag=cartDAO.updateCart(cart);
 		assertEquals("problem in cart", cartDAO.updateCart(cart));
 	}
-	//@Ignore
+	@Ignore
 	@Test
 	public void deleteCart()
 	{
@@ -84,10 +89,17 @@ public class CartTest
 		cart.setStatus("NP");
 		cart.setUsername("sravani");
 	
-		boolean flag=cartDAO.deleteCart(cart);
+		boolean flag=cartDAO.deleteCart(1);
 		assertEquals("createCartTestCase", true, flag);
 	}
-	
+	//@Ignore
+	@Test
+	public void retrieveCart()
+	{
+		Cart cart=new Cart();
+		boolean listproduct=cartDAO.getCartItem(1);
+		assertNotNull("problem in getting by id", cart);
+	}
 }
 
 

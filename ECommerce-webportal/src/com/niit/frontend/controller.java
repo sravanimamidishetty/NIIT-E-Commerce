@@ -1,6 +1,7 @@
 package com.niit.frontend;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,14 @@ public class controller {
 		return model;
 
 	}
+	
+	/*@RequestMapping(value ={"/","/hello"},method = RequestMethod.GET)
+	public String helloPage(Model m){
+		System.out.println("Inside Controller");
+		m.addAttribute("title", "Spring Security Custom Login Form");
+		m.addAttribute("message", "This is welcome page!");
+		return "hello";
+	}*/
 
 	@RequestMapping(value = "/admin**", method = RequestMethod.GET)
 	public ModelAndView adminPage() {

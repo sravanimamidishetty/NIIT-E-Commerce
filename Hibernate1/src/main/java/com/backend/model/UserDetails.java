@@ -7,10 +7,10 @@ import javax.persistence.Id;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Component
+@Component()
 public class UserDetails {
 	@Id
-	@GeneratedValue
+	//@GeneratedValue
 	private String username;
 	private String password;
 	private String role;
