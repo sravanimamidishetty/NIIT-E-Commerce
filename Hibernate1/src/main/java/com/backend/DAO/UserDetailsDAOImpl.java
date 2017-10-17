@@ -19,6 +19,7 @@ public class UserDetailsDAOImpl implements UserDetailsDAO {
 		this.sessionFactory=sessionFactory;
 	}
 
+@SuppressWarnings("rawtypes")
 @Transactional
 	public List getAllUserDetails() {
 		return sessionFactory.getCurrentSession().createQuery("from UserDetails").list();

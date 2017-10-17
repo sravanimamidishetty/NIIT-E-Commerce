@@ -7,8 +7,6 @@ import java.util.List;
 import javax.persistence.Query;
 import javax.transaction.Transaction;
 
-import org.hibernate.Hibernate;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +54,7 @@ public boolean deleteCart(int CartItemId) {
 	return false;
 	}
 	}
+@SuppressWarnings("rawtypes")
 @Transactional
 public boolean getCartItem(int CartItemId) {
 	Session session=sessionFactory.openSession();
@@ -77,6 +76,7 @@ public boolean getCartItem(int CartItemId) {
 	return true;
 }
 		
+@SuppressWarnings({ "unchecked", "unused" })
 @Transactional
 	public List<Cart> getCartItems(String username) {
 		List<Cart> cart = new ArrayList<Cart>();

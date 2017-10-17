@@ -41,7 +41,7 @@ public class Suppliertest
 	public void createSupplier()
 	{
 		Supplier supplier =new Supplier();
-		supplier.setSuppliername("flipkart");
+		supplier.setSupplier_name("flipkart");
 		boolean flag=supplierDAO.saveSupplier(supplier);
 		assertEquals("createSuppliertestCase", true, flag);
 	}

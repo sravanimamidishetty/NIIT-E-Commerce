@@ -35,7 +35,6 @@ import com.backend.model.UserDetails;
 @ComponentScan("com.backend")
 @EnableTransactionManagement
 @Component
-
 public class Dbconfig  
 {     
 	@Autowired
@@ -73,6 +72,7 @@ public class Dbconfig
 			sessionBuilder.addAnnotatedClass(UserDetails.class);
 			sessionBuilder.addAnnotatedClass(Cart.class);
 			sessionBuilder.addAnnotatedClass(Supplier.class);
+			sessionBuilder.scanPackages("com.backend");
 			System.out.println("Session");
 			
 			return sessionBuilder.buildSessionFactory();

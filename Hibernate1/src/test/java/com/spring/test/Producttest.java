@@ -1,4 +1,4 @@
-package com.spring.test;
+/*package com.spring.test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -17,9 +17,9 @@ import com.backend.model.Product;
 @Ignore
 public class Producttest 
 {	
-	/*@Autowired
+	@Autowired
 	private static Product product;
-	*/
+	
 	@Autowired
 	private static ProductDAO productDAO;
 		
@@ -37,32 +37,18 @@ public class Producttest
 		
 		
 	}
-	@Ignore
+	//@Ignore
 	@Test
 	public void addProduct()
 	{
 		Product product =new Product();
-		product.setName("iphone 7");
-		product.setQuantity(1);
-		product.setPrice(72000);
-		
-	
-		boolean flag=productDAO.addProduct(product);
+		product.setProduct_name("ios");
+		product.setProduct_quantity(6);
+		product.setProduct_price(7000);
+		boolean flag=productDAO.saveProduct(product);
 		assertEquals("createProductTestCase", true, flag);
 	}
-	//@Ignore
-	@Test
-	public void updateProduct()
-	{
-		Product product =new Product();
-		product.setName("iphone 7");
-		product.setQuantity(5);
-		product.setPrice(72000);
-		
 	
-		boolean flag=productDAO.updateProduct(product);
-		assertEquals("createProductTestCase", true, flag);
-	}
 }
-
+*/
 

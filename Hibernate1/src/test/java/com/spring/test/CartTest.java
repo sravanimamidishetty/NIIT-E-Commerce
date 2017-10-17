@@ -27,9 +27,6 @@ public class CartTest
 	*/
 	@Autowired
 	private static CartDAO cartDAO;
-
-	
-	
 	@SuppressWarnings("resource")
 	@BeforeClass
 	public static void initialize()
@@ -60,7 +57,7 @@ public class CartTest
 		boolean flag=cartDAO.addCart(cart);
 		assertEquals("createCartTestCase", true, flag);
 	}
-	@Ignore
+	//@Ignore
 	@Test
 	public void updateCart()
 	{
@@ -68,8 +65,8 @@ public class CartTest
 		cart.setCartItemId(1);
 		cart.setOrderId(135);
 		cart.setPrice(2500);
-		cart.setProductId(135);
-		cart.setQuantity(3);
+		cart.setProductId(136);
+		cart.setQuantity(5);
 		cart.setStatus("NP");
 		cart.setUsername("sravani");
 	
@@ -92,7 +89,7 @@ public class CartTest
 		boolean flag=cartDAO.deleteCart(1);
 		assertEquals("createCartTestCase", true, flag);
 	}
-	//@Ignore
+	@Ignore
 	@Test
 	public void retrieveCart()
 	{
