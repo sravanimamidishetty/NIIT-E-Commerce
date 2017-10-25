@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" isELIgnored="false"%>
 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -18,8 +17,11 @@
     	margin: 20px;
     }
 </style>
+<%-- <jsp:include page="showProduct.jsp" /> --%> 
+
 </head>
 <body>
+${ExistingMessage}
 <div class="bs-example">
     <nav id="myNavbar" class="navbar navbar-inverse" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -51,11 +53,10 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admin <b class="caret"></b></a>
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Sign Up <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="category">Category action</a></li>
-                            <li><a href="supplier">Supplier action</a></li>
-                            <li><a href="product">Product action</a></li>
+                            <li><a href="login">Login action</a></li>
+                            <li><a href="signup">Registration action</a></li>
                             <li class="divider"></li>
                             <!-- <li><a href="logout">Logout</a></li> -->
                          
@@ -66,10 +67,64 @@
                         </ul>
                     </li>
                 </ul>
+                   
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="viewcart">Cart</a></li>
+               </ul>         
             </div><!-- /.navbar-collapse -->
         </div>
     </nav>
 </div>
+<!-- =================================== -->
+
+	<div class="container">
+		<c:forEach items="${ProductList}" var="product">
+			<h2 style="color: red">
+				<c:out value="${product.name }" />
+			</h2>
+
+
+			<div class="pi-img-wrapper">
+										<img src="/dtproject/myImage/imageDisplay?id=${product.id}"
+											class="img-responsive" style="width: 180px; height: 250px">
+										<div>				</div>
+			</div>
+
+			<div class="col-xs-4 ">
+				<div class="img">
+					<div class="desc">
+						<p>
+						<div class="form-group">
+							<input type="text" class="form-control" value="${product.name}"
+								readonly="readonly">
+						</div>
+
+						<div class="form-group">
+							<input type="text" class="form-control"
+								value="Rs. ${product.price}" readonly="readonly">
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control"
+								value="${product.description}" readonly="readonly">
+						</div>
+						<div>
+
+                								<form action="addtoCart/${product.id}">
+										<input type="submit" value="Add to Cart" class="btn btn-primary" >
+
+									</form>
+							
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</c:forEach>
+	</div>
+
+
 
 </body>
-</html>             
+</html>   

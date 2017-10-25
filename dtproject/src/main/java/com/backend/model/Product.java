@@ -1,17 +1,18 @@
 package com.backend.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Transient;
-
+import javax.persistence.Lob;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Component
-public class Product 
+public class Product implements Serializable
 {
+
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -23,9 +24,11 @@ public class Product
 	private int quantity ;
 	private int category_id;
 	private int supplier_id;
-	@Transient
-	private MultipartFile image;
-	
+	private boolean instock;
+
+	@Lob
+	private byte[] image;
+
 	public int getId() {
 		return id;
 	}
@@ -82,12 +85,20 @@ public class Product
 		this.supplier_id = supplier_id;
 	}
 
-	public MultipartFile getImage() {
+	public boolean isInstock() {
+		return instock;
+	}
+
+	public void setInstock(boolean instock) {
+		this.instock = instock;
+	}
+
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(MultipartFile image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
-
+	
 }

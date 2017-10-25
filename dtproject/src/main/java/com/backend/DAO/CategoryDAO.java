@@ -6,7 +6,7 @@ import com.backend.model.Category;
 public interface CategoryDAO 
 {
 	public boolean saveCategory(Category category);
-	
+
 	public List<Category> list();
 
 	public Category getCategoryById(int category_id);

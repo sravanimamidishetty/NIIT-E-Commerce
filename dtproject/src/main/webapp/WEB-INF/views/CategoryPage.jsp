@@ -39,15 +39,15 @@
 				</div>
 				<br/>
 				<div class="form-group row">
-					<label for="category_name" class="col-xs-4 control-label">Category Name</label>
+					<label for="category_Name" class="col-xs-4 control-label">Category Name</label>
 					<div class="col-xs-4">
-						<form:input name="category_name" path="category_name" placeholder="Category Name" class="form-control" />
+						<form:input name="categoryName" path="category_Name" placeholder="Category Name" class="form-control" />
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="category_Description" class="col-xs-4 control-label">Category description</label>
 					<div class="col-xs-4">
-						<form:input name="category_description"  path="category_description" placeholder="Category Description" class="form-control" />
+						<form:input name="categoryDescription"  path="category_Description" placeholder="Category Description" class="form-control" />
 						 
 					</div>
 				</div>
@@ -71,7 +71,7 @@
 					</div>
 						
 		</form:form><br/>
-		
+		,
 		<table class="table table-striped table-bordered" style="width:80%">
 			<thead>
 			<tr>
@@ -87,8 +87,8 @@
 			   		<tr>
 			   			<td><c:out value="${loopCounter.count}"></c:out></td>
 			   			<td><c:out value="${category.category_id}"></c:out></td>
-			   			<td><c:out value="${category.category_name}"></c:out></td>
-			   			<td><c:out value="${category.category_description}"></c:out></td>
+			   			<td><c:out value="${category.category_Name}"></c:out></td>
+			   			<td><c:out value="${category.category_Description}"></c:out></td>
 			   			<td><nobr>
 <a class="btn btn-primary" href="editcategory/${category.category_id}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</a>
 

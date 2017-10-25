@@ -13,61 +13,65 @@ import com.backend.model.Category;
 @SuppressWarnings("deprecation")
 @Repository
 public class CategoryDAOImpl implements CategoryDAO {
-	
 	@Autowired
-	SessionFactory sessionFactory;
-	
-	public CategoryDAOImpl(SessionFactory sessionFactory) {
-		
-		this.sessionFactory = sessionFactory;
-	}
+  	SessionFactory sessionFactory;
+  	
+  	public CategoryDAOImpl(SessionFactory sessionFactory) {
+  		
+  		this.sessionFactory = sessionFactory;
+  	}
+  	
+  	
+  	@Transactional
+  	public boolean saveCategory(Category category) {
+  		
 
-	@Transactional
-	public boolean saveCategory(Category category) {
-		
-		 sessionFactory.getCurrentSession().saveOrUpdate(category);
-		 return true;
-	}
-		
-	
-	@Transactional
-	public List<Category> list() {
-		@SuppressWarnings({ "unchecked" })
-		List<Category> listCategory = (List<Category>) sessionFactory.getCurrentSession()
-				.createCriteria(Category.class)
-				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-
-		return listCategory;
-	}
-	@Transactional
-	public Category getCategoryById(int category_id) {
-		String hql = "from"+" Category"+" where id=" + category_id;
-		@SuppressWarnings("rawtypes")
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		
-		@SuppressWarnings({ "unchecked" })
-		List<Category> listCategory = (List<Category>) query.list();
-		
-		if (listCategory != null && !listCategory.isEmpty()) {
-			return listCategory.get(0);
-		}
-		
-		return null;
-	}
+  		 sessionFactory.getCurrentSession().saveOrUpdate(category);
+  		
+  		
+  		
+  		 return true;
+  	}
+  	
 
 
 
-	@Transactional
-	public Category removeCategoryById(int category_id) {
-		Category CategoryToDelete = new Category();
-		CategoryToDelete.setCategory_id(category_id);
-		sessionFactory.getCurrentSession().delete(CategoryToDelete);
-		return CategoryToDelete;
-	}
+  	@Transactional
+  	public List<Category> list() {
+  		@SuppressWarnings("unchecked")
+  		List<Category> listCategory = (List<Category>) sessionFactory.getCurrentSession()
+  				.createCriteria(Category.class)
+  				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+
+  		return listCategory;
+  	}
 
 
 
 
-	
+  	@Transactional
+  	public Category getCategoryById(int category_id) {
+  		String hql = "from"+" Category"+" where id=" + category_id;
+  		@SuppressWarnings("rawtypes")
+  		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+  		
+  		@SuppressWarnings("unchecked")
+  		List<Category> listCategory = (List<Category>) query.list();
+  		
+  		if (listCategory != null && !listCategory.isEmpty()) {
+  			return listCategory.get(0);
+  		}
+  		
+  		return null;
+  	}
 
-}
+
+
+  	@Transactional
+  	public Category removeCategoryById(int category_id) {
+  		Category CategoryToDelete = new Category();
+  		CategoryToDelete.setCategory_id(category_id);
+  		sessionFactory.getCurrentSession().delete(CategoryToDelete);
+  		return CategoryToDelete;
+  	}
+  } 	

@@ -14,7 +14,6 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
 import com.backend.DAO.CartDAO;
 import com.backend.DAO.CartDAOImpl;
 import com.backend.DAO.CategoryDAO;
@@ -23,13 +22,17 @@ import com.backend.DAO.ProductDAO;
 import com.backend.DAO.ProductDAOImpl;
 import com.backend.DAO.SupplierDAO;
 import com.backend.DAO.SupplierDAOImpl;
-import com.backend.DAO.UserDetailsDAO;
-import com.backend.DAO.UserDetailsDAOImpl;
+import com.backend.DAO.UserDAO;
+import com.backend.DAO.UserDAOImpl;
 import com.backend.model.Cart;
 import com.backend.model.Category;
 import com.backend.model.Product;
 import com.backend.model.Supplier;
-import com.backend.model.UserDetails;
+import com.backend.model.User;
+
+
+
+
 
 @Configuration
 @ComponentScan("com.backend")
@@ -38,7 +41,7 @@ import com.backend.model.UserDetails;
 public class Dbconfig  
 {     
 	@Autowired
-	 @Bean(name = "dataSource")
+	@Bean(name = "dataSource")
 		public DataSource getDataSource() {
 			DriverManagerDataSource dataSource = new DriverManagerDataSource();
 			dataSource.setDriverClassName("org.h2.Driver");
@@ -50,8 +53,7 @@ public class Dbconfig
 
 		}
 
-	 
-	 private Properties getHibernateProperties() 
+		private Properties getHibernateProperties() 
 		{
 			Properties properties = new Properties();
 			properties.put("hibernate.show_sql", "true");
@@ -69,11 +71,12 @@ public class Dbconfig
 			sessionBuilder.addProperties(getHibernateProperties());
 			sessionBuilder.addAnnotatedClass(Product.class);
 			sessionBuilder.addAnnotatedClass(Category.class);
-			sessionBuilder.addAnnotatedClass(UserDetails.class);
-			sessionBuilder.addAnnotatedClass(Cart.class);
 			sessionBuilder.addAnnotatedClass(Supplier.class);
-			sessionBuilder.scanPackages("com.backend");
+			sessionBuilder.addAnnotatedClass(Cart.class);
+			sessionBuilder.addAnnotatedClass(User.class);
+			sessionBuilder.scanPackages("com.backend.*");
 			System.out.println("Session");
+			
 			
 			return sessionBuilder.buildSessionFactory();
 			
@@ -86,7 +89,6 @@ public class Dbconfig
 			System.out.println("Transaction");
 			return transactionManager;
 		}
-		
 	//Factory Design pattern
 	@Autowired
 	@Bean(name = "productDAO")
@@ -101,23 +103,24 @@ public class Dbconfig
 	{
 		return new CategoryDAOImpl(sessionFactory);
 	}
+	
 	@Autowired
-	@Bean(name = "userDetailsDAO")
-	public UserDetailsDAO getUserDetailsDAO(SessionFactory sessionFactory)
+	@Bean(name = "supplierDAO")
+	public SupplierDAO getSupplierDAO(SessionFactory sessionFactory)
 	{
-		return new UserDetailsDAOImpl(sessionFactory);
+		return new SupplierDAOImpl(sessionFactory);
 	}
 	
 	@Autowired
 	@Bean(name = "cartDAO")
 	public CartDAO getCartDAO(SessionFactory sessionFactory)
 	{
-		return new CartDAOImpl();
+		return new CartDAOImpl(sessionFactory);
 	}
 	@Autowired
-	@Bean(name = "supplierDAO")
-	public SupplierDAO getSupplierDAO(SessionFactory sessionFactory)
+	@Bean(name = "userDAO")
+	public UserDAO getUserDAO(SessionFactory sessionFactory)
 	{
-		return new SupplierDAOImpl(sessionFactory);
+		return new UserDAOImpl(sessionFactory);
 	}
 }

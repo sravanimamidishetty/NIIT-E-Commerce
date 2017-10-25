@@ -1,115 +1,109 @@
 package com.backend.DAO;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import javax.persistence.Query;
-import javax.transaction.Transaction;
+import javax.transaction.Transactional;
 
-import org.hibernate.Session;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.backend.model.Cart;
-@Repository
+
+@SuppressWarnings("deprecation")
 public class CartDAOImpl implements CartDAO {
-@Autowired
-SessionFactory sessionFactory;
-//public CartDAOImpl(SessionFactory sessionFactory) {
-	//this.sessionFactory=sessionFactory;
-//}
-@Transactional
-public boolean addCart(Cart cart) {
-		try{
-			sessionFactory.getCurrentSession().saveOrUpdate(cart);
-			return true;
-		}
-		catch(Exception e){
-		
-		return false;
-		}
+
+	@Autowired
+	SessionFactory sessionFactory;
+
+	public CartDAOImpl(SessionFactory sessionFactory) {
+	
+		this.sessionFactory = sessionFactory;
 	}
-@Transactional
-	public boolean updateCart(Cart cart) {
-		try{
-			sessionFactory.getCurrentSession().saveOrUpdate(cart);
-			return true;
-		}
-		catch(Exception e){
-		
-		return false;
-		}
-	}
-@Transactional
-public boolean deleteCart(int CartItemId) {
-	try{
-		sessionFactory.getCurrentSession().createQuery("DELETE FROM CART WHERE CartItemId = "+CartItemId).executeUpdate();
+
+
+	@Transactional
+	public boolean saveProductToCart(Cart cart) {
+		sessionFactory.getCurrentSession().saveOrUpdate(cart);
 		return true;
 	}
-	catch(Exception e){
 
-	return false;
+	@Transactional
+	public Cart getitem(int prodId, int userId) {
+		String hql = "from"+" Cart"+" where userid="+userId+" and productid="+prodId;
+		@SuppressWarnings({ "rawtypes" })
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		@SuppressWarnings({ "unchecked" })
+		List<Cart> list = (List<Cart>) query.list();
+		if (list!= null && !list.isEmpty()) {
+			return list.get(0);
+		}
+		return null;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Cart> listCart() {
+		List<Cart> cartList= sessionFactory.getCurrentSession().createQuery("from Cart").list();
+		return cartList;
 	}
-@SuppressWarnings("rawtypes")
-@Transactional
-public boolean getCartItem(int CartItemId) {
-	Session session=sessionFactory.openSession();
-	Query q=session.createQuery("from Cart cart");
-	List l=q.getResultList();
-	System.out.println("Totaal number of records:"+l.size());;
-	Iterator it=l.iterator();
-	 
-	while(it.hasNext())
-	 {
-		 Object o = (Object)it.next();
-		Cart cart = (Cart)o;
-		 System.out.println("Cart CartItemId : "+cart.getCartItemId());
-		 System.out.println("Cart Username : "+cart.getUsername());
-		 System.out.println("Cart Quantity : "+cart.getQuantity());
-		 System.out.println("Cart Price : "+cart.getPrice());
-		 System.out.println("----------------------");
-	 } 
-	return true;
-}
-		
-@SuppressWarnings({ "unchecked", "unused" })
-@Transactional
-	public List<Cart> getCartItems(String username) {
-		List<Cart> cart = new ArrayList<Cart>();
-        Transaction trns = null;
-        Session session =sessionFactory.openSession();
-        try {
-            trns = (Transaction) session.beginTransaction();
-            cart = session.createQuery("from Cart").list();
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-        } finally {
-            session.flush();
-            session.close();
-        }
-        return cart;
-}
-/*public boolean getProduct(int id) {
-	Session session=sessionFactory.openSession();
-	Query q=session.createQuery("from Product p");
-	List l=q.getResultList();
-	System.out.println("Totaal number of records:"+l.size());;
-	Iterator it=l.iterator();
-	 
-	while(it.hasNext())
-	 {
-		 Object o = (Object)it.next();
-		 Product p = (Product)o;
-		 System.out.println("Product id : "+p.getId());
-		 System.out.println("Product Name : "+p.getName());
-		 System.out.println("Product Quantity : "+p.getQuantity());
-		 System.out.println("Product Price : "+p.getPrice());
-		 System.out.println("----------------------");
-	 } 
-	return true;*/
-}
+
+	@Transactional
+	public boolean removeCartById(int cart_id) {
+		 Object persistentInstance =sessionFactory.getCurrentSession().load(Cart.class, cart_id);
+		    if (persistentInstance != null) {
+		    	sessionFactory.getCurrentSession().delete(persistentInstance);
+		        return true;
+		    }
+		    return false;
+	}
+
+	@Transactional
+	public long cartsize(int userId) {
+		Criteria c=sessionFactory.getCurrentSession().createCriteria(Cart.class);
+		c.add(Restrictions.eq("userId", userId));
+		c.add(Restrictions.eq("status","C"));
+		c.setProjection(Projections.count("userId"));
+		long count= (Long) c.uniqueResult();
+		return count;
+	}
 	
+	@Transactional
+	public double CartPrice(int userId) {
+		Criteria c=sessionFactory.getCurrentSession().createCriteria(Cart.class);
+		c.add(Restrictions.eq("userId", userId));
+		c.add(Restrictions.eq("status","C"));
+		c.setProjection(Projections.sum("subTotal"));
+		double l=  (Double) c.uniqueResult();
+		return l;
+	}
+
+	@Transactional
+	public Cart editCartById(int cart_id) {
+Cart cart=	sessionFactory.getCurrentSession().get(Cart.class,cart_id);
+		
+		return cart;
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Transactional
+	public Cart getCartById(int cart_id) {
+		String hql = "from"+" Cart"+" where id=" + cart_id;
+
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		
+
+		List<Cart> listCart = (List<Cart>) query.list();
+		
+		if (listCart != null && !listCart.isEmpty()) {
+			return listCart.get(0);
+		}
+		
+		return null;
+	}
+	
+
+}

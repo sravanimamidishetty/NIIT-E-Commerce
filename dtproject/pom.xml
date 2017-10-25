@@ -7,11 +7,11 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>dtproject Maven Webapp</name>
   <url>http://maven.apache.org</url>
-  <properties>
+<properties>
 		<org.slf4j-version>1.7.5</org.slf4j-version>
 	</properties>
-  <dependencies>
-  <!-- https://mvnrepository.com/artifact/junit/junit -->
+	<dependencies>
+    <!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
@@ -72,6 +72,7 @@
 			<version>2.1.1</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+		
 
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
 		<dependency>
@@ -91,6 +92,12 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.4.1.Final</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-webapp -->
+<dependency>
+    <groupId>org.eclipse.jetty</groupId>
+    <artifactId>jetty-webapp</artifactId>
+    <version>9.4.3.v20170317</version>
+</dependency>
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
