@@ -147,13 +147,16 @@ public String deleteorder(@PathVariable("id") int id, HttpSession session) {
 	return "redirect:/viewcart";
 }
 
-
 @RequestMapping("continue_shopping")
 public String continueshopping()
 {
 return "redirect:/";	
 
+
 }
-
-
+@RequestMapping("Checkout")
+public String checkout()
+{
+return "payment";
+}
 }

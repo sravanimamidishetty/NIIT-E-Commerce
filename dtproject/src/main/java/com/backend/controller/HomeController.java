@@ -94,7 +94,7 @@ public class HomeController {
 			     {
 			    	 session.setAttribute("UserLoggedIn", "true");
 			    	//session.setAttribute("cartsize",cartDAO.cartsize((Integer)session.getAttribute("userid")));
-			    	 return "redirect:/";
+			    	 return "loggedin";
 			     }
 			     else 
 			     {
@@ -160,7 +160,10 @@ public class HomeController {
 		    return "redirect:/";
 		}
 
-		
-		
+		 @RequestMapping("/Profile")
+		    public String Profile()
+		    {
+			 return "redirect:/ProfilePage";
+		    }
 	 }
 	    
