@@ -30,10 +30,6 @@ import com.backend.model.Product;
 import com.backend.model.Supplier;
 import com.backend.model.User;
 
-
-
-
-
 @Configuration
 @ComponentScan("com.backend")
 @EnableTransactionManagement

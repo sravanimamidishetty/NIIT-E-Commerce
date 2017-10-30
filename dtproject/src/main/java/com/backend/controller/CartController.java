@@ -150,13 +150,7 @@ public String deleteorder(@PathVariable("id") int id, HttpSession session) {
 @RequestMapping("continue_shopping")
 public String continueshopping()
 {
-return "redirect:/";	
+return "loggedin";	
 
-
-}
-@RequestMapping("Checkout")
-public String checkout()
-{
-return "payment";
 }
 }

@@ -78,7 +78,7 @@
 			</h2>
 
 
-			<div class="pi-img-wrapper">
+			<div class="row">
 										<img src="/ECommFrontEnd/myImage/imageDisplay?id=${product.id}"
 											class="img-responsive" style="width: 180px; height: 120px">
 										<div>				</div>
@@ -89,16 +89,16 @@
 					<div class="desc">
 						<p>
 						<div class="form-group">
-							<input type="text" class="form-control" value="${product.name}"
+							<input type="text"style="width: 300px;" class="form-control" value="${product.name}"
 								readonly="readonly">
 						</div>
 
 						<div class="form-group">
-							<input type="text" class="form-control"
+							<input type="text"style="width: 300px;"  class="form-control"
 								value="Rs. ${product.price}" readonly="readonly">
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control"
+							<input type="text"style="width: 300px;"  class="form-control"
 								value="${product.description}" readonly="readonly">
 						</div>
 						<div>

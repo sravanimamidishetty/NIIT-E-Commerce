@@ -20,6 +20,11 @@
 <%-- <jsp:include page="showProduct.jsp" /> --%> 
 
 </head>
+<div class="container"> 
+       <div style='position:absolute;zindex:0;left:0;top:0;width:100%;height:100%'>
+           <img src='F:\images\index.jpg' style='width:100%;height:300%' alt='[]' />
+       </div>
+   </div>
 <body>
 ${ExistingMessage}
 <div class="bs-example">
@@ -79,50 +84,79 @@ ${ExistingMessage}
 <!-- =================================== -->
 
 	<div class="container">
-		<c:forEach items="${ProductList}" var="product">
-			<h2 style="color: red">
-				<c:out value="${product.name }" />
-			</h2>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="1" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="3" class="active"></li>
+  </ol>
 
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+      <img class="img-rounded" class="img-responsive center-block"
+      src="F:\images\down.jpg" style="width:100%" "height="50%">
+    </div>
+    <div class="item">
+    <img class="img-rounded" class="img-responsive center-block"
+      src="F:\images\down2.jpg" style="width:100%" "height="50%">
+    </div>
 
-			<div class="pi-img-wrapper">
-										<img src="/dtproject/myImage/imageDisplay?id=${product.id}"
-											class="img-responsive" style="width: 180px; height: 250px">
-										<div>				</div>
-			</div>
-
-			<div class="col-xs-4 ">
-				<div class="img">
-					<div class="desc">
-						<p>
-						<div class="form-group">
-							<input type="text" class="form-control" value="${product.name}"
-								readonly="readonly">
-						</div>
-
-						<div class="form-group">
-							<input type="text" class="form-control"
-								value="Rs. ${product.price}" readonly="readonly">
-						</div>
-						<div class="form-group">
-							<input type="text" class="form-control"
-								value="${product.description}" readonly="readonly">
-						</div>
-						<div>
-
-                								<form action="addtoCart/${product.id}">
-										<input type="submit" value="Add to Cart" class="btn btn-primary" >
-
-									</form>
-							
-
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</c:forEach>
-	</div>
+    <div class="item">
+    <img class="img-rounded" class="img-responsive center-block"
+      src="F:\images\down3.jpg" style="width:100%" "height="20%">
+    </div>
+ 
+  </div>
+  <!-- Left and right controls -->
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+<!-- =================================== -->
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+	<div class="container">
+          
+        <div class="row">
+<c:forEach items="${ProductList}" var="product">     
+            <div class="col-sm-4">
+                <div class="panel panel-primary">
+             <div class="panel-body"> <img src="/dtproject/myImage/imageDisplay?id=${product.id}" class="img-responsive" style="width:100%" alt="Image"></div>
+                <%-- <img src="<c:url value="/resources/assets/img/rv_1-gito-1.jpg"/>">
+                    --%> <div class="caption">
+                        <h3>${product.name}</h3>
+                        <ul>
+                         <p>${product.description}</p>
+                        <li>Price: Rs.<Strong>${product.price}</Strong></li>
+                       
+     
+                   <form:form action="addtoCart/${product.id}" method="POST">
+                                <input type="submit" value="Add to Cart" class="btn btn-primary">
+                                </form:form>
+                                
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+         
+           </c:forEach>       
+                </div>
+                
+         
+        </div>
+<br/><br/><br/><br/>
 
 
 
