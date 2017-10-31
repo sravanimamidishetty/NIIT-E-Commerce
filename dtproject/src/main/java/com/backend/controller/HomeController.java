@@ -58,7 +58,7 @@ public class HomeController {
 	    	session.setAttribute("HomeList", productDAO.homeList());
 	    	session.setAttribute("CartList",cartDAO.listCart());
 	    	m.addAttribute("UserClickedshowproduct", "true");
-	    	// session.setAttribute("ListProduct", productDAO.getProductByCategoryID(id));
+	    	/*session.setAttribute("ListProduct", productDAO.getProductByCategoryID(id));*/
 			return "index";
 	    }
 	
@@ -71,12 +71,13 @@ public class HomeController {
 	    	if(logout!=null)
 	    		model.addAttribute("logout","Loggedout successfully");
 	    		model.addAttribute("LoginPageClicked", true);
+	    		//model.addAttribute("loggedin successfully");
 	    	return "LoginPage";
 	    	
 	    }
 	 @SuppressWarnings("unchecked")
 		@RequestMapping(value = "/login_session_attributes")
-		public String login_session_attributes(Model model) {
+		public String login_session_attributes(HttpSession session,Model model) {
 			String email = SecurityContextHolder.getContext().getAuthentication().getName();
 			
 			User user = userDAO.get(email);
@@ -94,7 +95,7 @@ public class HomeController {
 			     {
 			    	 session.setAttribute("UserLoggedIn", "true");
 			    	//session.setAttribute("cartsize",cartDAO.cartsize((Integer)session.getAttribute("userid")));
-			    	 return "loggedin";
+			    	 return "/loggedin";
 			     }
 			     else 
 			     {
@@ -103,28 +104,25 @@ public class HomeController {
 			    	 model.addAttribute("ProductPageClicked", "true");
 			    	 model.addAttribute("supplierList",supplierDAO.list());
 			    	 model.addAttribute("categoryList",categoryDAO.list());
-				 return "/admin";
+				 return "/Admin";
 			     }
 			}
 			return "/index";
 	 }
 
 			
-			@RequestMapping(value = "signup")
+	   	@RequestMapping(value = "signup")
 			public String DisplayRegister(Model mv) {
 				mv.addAttribute("user", new User());
 				mv.addAttribute("IfRegisterClicked", "true");
-
-				return "Signup";
+				return "RegistrationPage";
 			}
 
-			
-			
 			@RequestMapping(value = "/saveUser", method = RequestMethod.POST)
 			public String UserRegister(@ModelAttribute("user") User user,RedirectAttributes attributes) {
 				user.setEnabled(true);
 				user.setRole("ROLE_USER");
-				userDAO.saveOrUpdate(user);
+				userDAO.saveUser(user);
 				attributes.addFlashAttribute("SuccessMessage","Registration Successfull");
 				return "redirect:/";
 			}
@@ -138,16 +136,12 @@ public class HomeController {
 			}
 			
 
-			  @RequestMapping(value ="ShowProduct/{id}" )
+			@RequestMapping(value ="showProduct/{id}" )
 			    public String ShowProduct(@PathVariable("id") int id,RedirectAttributes attributes,Model m) {
 			        m.addAttribute("UserClickedshowproduct", "true");
 			        m.addAttribute("productList", productDAO.getProductById(id));
-			    	return "ShowProduct";
+			    	return "showProduct";
 			    }
-			
-			
-			
-
 			
 		@RequestMapping(value ="nav/{id}" )
 		public String ShowProductByCategory(@PathVariable("id") int id,RedirectAttributes attributes,Model m) {
@@ -159,11 +153,4 @@ public class HomeController {
 		    System.out.println("Listed the product by Category ID:"+id);
 		    return "redirect:/";
 		}
-
-		 @RequestMapping("/Profile")
-		    public String Profile()
-		    {
-			 return "redirect:/ProfilePage";
-		    }
-	 }
-	    
+}

@@ -30,7 +30,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Brand</a>
+                <a class="navbar-brand" href="#">TELLYHUB</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -70,6 +70,13 @@
         </div>
     </nav>
 </div>
+<center> 
+<div class="jumbotron">
+     <h1>Hey!Admin</h1>
+  <h2>Welcome to TELLYHUB</h2>      
+ <!--   <p>One Destination for all your Celebrations</p>-->
+ </div>
+</center>
 </br>
 </br>
 </br>

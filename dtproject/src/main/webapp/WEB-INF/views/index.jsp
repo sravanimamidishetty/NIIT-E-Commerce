@@ -22,7 +22,7 @@
 </head>
 <div class="container"> 
        <div style='position:absolute;zindex:0;left:0;top:0;width:100%;height:100%'>
-           <img src='F:\images\index.jpg' style='width:100%;height:300%' alt='[]' />
+           <img src='F:\images\index.jpg' style='width:200%;height:300%' alt='[]' />
        </div>
    </div>
 <body>

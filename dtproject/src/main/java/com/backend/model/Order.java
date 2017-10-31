@@ -15,7 +15,7 @@ public class Order {
 	@Id
 	@Column(name="Orderid")
 	@GeneratedValue
-	private int orderId;
+	private String orderId;
 	
 	private int userid;
 	private String productname;
@@ -24,12 +24,12 @@ public class Order {
 	private String status;
 	private double subTotal;
 	private int productid;
-	/*public String getOrderId() {
+	public String getOrderId() {
 		return orderId;
 	}
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;
-	}*/
+	}
 	public int getUserid() {
 		return userid;
 	}

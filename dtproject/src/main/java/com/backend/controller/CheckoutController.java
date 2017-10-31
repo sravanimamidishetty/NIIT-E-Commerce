@@ -19,14 +19,11 @@ import com.backend.DAO.UserDAO;
 import com.backend.model.Card;
 import com.backend.model.User;
 
-
 @Controller
 public class CheckoutController {
 	
 	@Autowired
 	CheckDAO checkDAO;
-	
-
 	
 	@Autowired
 	UserDAO userDAO;
@@ -40,18 +37,17 @@ public class CheckoutController {
 	@Autowired
 	CardDAO cardDAO;
 	
-	@RequestMapping("checkout")
-	public String CheckoutPage(@ModelAttribute ("card") Card card, Model model)
+	@RequestMapping(value = "checkout")
+	public String CheckoutPage(@ModelAttribute("card")Card card,Model model)
 	{
-		//model.addAttribute("total", checkDAO.getTotal(uid));
-		return "CheckOut";
-		
+	//	model.addAttribute("total", checkOutDAO.getTotal(userid));
+		return "CheckOut";	
 	}
 
-	
-	@RequestMapping(value="/invoice",method=RequestMethod.POST)
-	public String InvoicePage(@ModelAttribute ("card") Card card, HttpSession session, Model model){
 		
+	@RequestMapping(value="/invoice",method=RequestMethod.POST)
+	public String InvoicePage(@ModelAttribute ("card") Card card, HttpSession session, Model model)
+	{
 		int charges=99;
 		int userid = (Integer) session.getAttribute("userid");
 		cartDAO.getCartById(userid);
@@ -66,31 +62,30 @@ public class CheckoutController {
 		model.addAttribute("cod", charges);
 		cartDAO.removeCartById(userid);
 		return "Invoice";
-	
-	
 	}
+	
 	
 	@RequestMapping(value="/CodInvoice",method=RequestMethod.POST)
-	public String CodInvoicePage(@ModelAttribute ("card") Card card,HttpSession session, Model model){
+	public String CodInvoicePage(@ModelAttribute ("card") Card card,HttpSession session, Model model)
+	{
+		
 		int charges=99;
-		
-String email = SecurityContextHolder.getContext().getAuthentication().getName();
-		
-		User user = userDAO.get(email);
-		
-		//int userid=user.getId();
-		
-		int userid = (Integer) session.getAttribute("userid");
-		cartDAO.getCartById(userid);
-		orderDAO.OrderDetails();
+		int userId = (Integer) session.getAttribute("userid");
+		cartDAO.getCartByStatus(userId);
+		//mailService.sendEmail(userId);
 	
-		model.addAttribute("user", userDAO.getUserById(userid));
-    	model.addAttribute("cd", cartDAO.getCartById(userid));
-    	model.addAttribute("total",checkDAO.getTotal(userid));
+		orderDAO.OrderDetails();
+		model.addAttribute("user", userDAO.getUserById(userId));
+    	model.addAttribute("cd", cartDAO.getCartById(userId));
+    	/*cart.setGrandTotal(checkOutDAO.getTotal(userId)+"99");
+    	*/model.addAttribute("total",checkDAO.getTotal(userId));
    
 		model.addAttribute("cod", charges);
-		cartDAO.removeCartById(userid);
+		cartDAO.removeCartById(userId);
 		return "Invoice";
-	
 	}
+   @RequestMapping(value="ContinueShopping")
+   public String continueshopping(){
+	   return "/";
+   }
 }

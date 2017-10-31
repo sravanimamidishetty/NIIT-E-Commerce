@@ -47,7 +47,7 @@ public class OrderDAOImpl implements OrderDAO {
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Order> getTotal(int uid) {
+	public List<Order> getTotal(int uid) 
 		// TODO Auto-generated method stub
 		
 	 {
@@ -57,5 +57,3 @@ public class OrderDAOImpl implements OrderDAO {
 
 		}
 	}
-}
-
